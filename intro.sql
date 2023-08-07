@@ -47,7 +47,22 @@ ALTER TABLE users
 DROP COLUMN age;
 
 
-
-
-
 SELECT * FROM users; 
+
+-- department table
+CREATE TABLE Department(
+    deptId SERIAL PRIMARY KEY,
+    deptName VARCHAR(255) NOT NULL
+);
+INSERT INTO Department  VALUES (1,'IT');
+
+-- employee table
+CREATE TABLE Employee(
+    empId SERIAL PRIMARY KEY,
+    empName VARCHAR(255) NOT NULL,
+    departmentId INT,
+    constraint fk_constraint_dept
+       FOREIGN KEY (departmentId)
+       REFERENCES Department(deptId)
+);
+INSERT INTO Employee VALUES (1, 'employee', 1);
