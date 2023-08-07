@@ -66,3 +66,15 @@ CREATE TABLE Employee(
        REFERENCES Department(deptId)
 );
 INSERT INTO Employee VALUES (1, 'employee', 1);
+
+CREATE Table courses(
+    course_id SERIAL PRIMARY KEY,
+    course_name VARCHAR(255) NOT NULL
+    description VARCHAR(255) ,
+    published_date DATE
+);
+UPDATE courses 
+SET course_name = 'Course',
+description = 'Course description'
+WHERE course_id = 1;
+
