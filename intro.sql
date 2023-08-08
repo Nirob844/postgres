@@ -59,42 +59,96 @@ UPDATE courses
 SET course_name = 'Course',
 description = 'course description'
 WHERE course_id = 1;
+UPDATE employee 
+set departmentId = NULL
+WHERE empId =8;
 
-DELETE FROM courses WHERE course_id =1;
+SELECT * FROM employee;
+DELETE FROM courses WHERE empId =5;
 
 -- department table
 CREATE TABLE Department(
     deptId SERIAL PRIMARY KEY,
     deptName VARCHAR(255) NOT NULL
 );
-INSERT INTO Department  VALUES (1,'IT');
 
+
+INSERT INTO Department (deptName) VALUES
+    ('Sales'),
+    ('Marketing'),
+    ('Engineering'),
+    ('Human Resources'),
+    ('Finance'),
+    ('IT'),
+    ('Operations'),
+    ('Customer Service'),
+    ('Research and Development'),
+    ('Product Management'),
+    ('Quality Assurance'),
+    ('Design'),
+    ('Logistics'),
+    ('Legal'),
+    ('Public Relations'),
+    ('Administration'),
+    ('Supply Chain'),
+    ('Training and Development'),
+    ('Business Development'),
+    ('Manufacturing');
+
+SELECT *FROM Department;
 -- employee table
 CREATE TABLE Employee(
     empId SERIAL PRIMARY KEY,
     empName VARCHAR(255) NOT NULL,
     email TEXT  NOT NULL,
     salary INTEGER NOT NULL,
-    joiningDate DATE NOT NULL
+    joiningDate DATE NOT NULL,
     departmentId INT,
     constraint fk_constraint_dept
        FOREIGN KEY (departmentId)
        REFERENCES Department(deptId)
 );
-INSERT INTO Employee VALUES (1, 'employee', 1);
+INSERT INTO Employee (empName, email, salary, joiningDate, departmentId) 
+VALUES
+    ('John Doe', 'john.doe@example.com', 50000, '2023-01-15', 1),
+    ('Jane Smith', 'jane.smith@example.com', 60000, '2023-02-20', 2),
+    ('Michael Johnson', 'michael.johnson@example.com', 55000, '2022-11-10', 3),
+    ('Emily Brown', 'emily.brown@example.com', 65000, '2023-05-05', 4),
+    ('William Davis', 'william.davis@example.com', 52000, '2023-03-12', 5),
+    ('Olivia Wilson', 'olivia.wilson@example.com', 58000, '2022-09-25', 6),
+    ('James Martinez', 'james.martinez@example.com', 62000, '2023-07-18', 7),
+    ('Emma Anderson', 'emma.anderson@example.com', 53000, '2023-04-01', 8),
+    ('Liam Taylor', 'liam.taylor@example.com', 68000, '2022-12-22', 9),
+    ('Ava Rodriguez', 'ava.rodriguez@example.com', 59000, '2023-06-08', 10),
+    ('Sophia Clark', 'sophia.clark@example.com', 57000, '2022-10-09', 11),
+    ('Noah White', 'noah.white@example.com', 62000, '2022-11-18', 12),
+    ('Isabella Hall', 'isabella.hall@example.com', 54000, '2023-01-30', 13),
+    ('Liam Davis', 'liam.davis@example.com', 63000, '2023-02-10', 14),
+    ('Olivia Allen', 'olivia.allen@example.com', 57000, '2023-04-22', 15),
+    ('Lucas Martinez', 'lucas.martinez@example.com', 61000, '2023-06-11', 16),
+    ('Sophia Miller', 'sophia.miller@example.com', 55000, '2022-09-07', 17),
+    ('Aiden Smith', 'aiden.smith@example.com', 64000, '2022-12-03', 18),
+    ('Amelia Wilson', 'amelia.wilson@example.com', 59000, '2023-03-27', 19),
+    ('Jackson Johnson', 'jackson.johnson@example.com', 56000, '2023-07-02', 20);
+
 
 -- ## SELECT
 SELECT * FROM Employee;
+SELECT * FROM department;
 SELECT empId,empName, departmentId FROM Employee;
 SELECT * FROM Employee WHERE salary >90000;
-SELECT * FROM Employee ORDER BY name ASC LIMIT 10 OFFSET 0;
+SELECT * FROM Employee ORDER BY empName ASC LIMIT 10 OFFSET 0;
 
 -- in not in between like
-SELECT * FROM Employee WHERE IN (1,2,3,4,5) ;
-SELECT * FROM Employee WHERE salary BETWEEN 1000 ADD 15000;
-SELECT * FROM employee WHERE name LIKE '%a%';
-SELECT * FROM employee WHERE name LIKE '__a__';
+SELECT * FROM Employee WHERE departmentId IN (1, 2, 3, 4, 5);
 
+SELECT * FROM Employee WHERE salary BETWEEN 50000 AND 60000;
+SELECT * FROM employee WHERE empName LIKE '%a%';
+SELECT * FROM employee WHERE empName LIKE '_a_';
 
- 
+-- ## joining inner left right
+ SELECT empId,empName, deptId,deptName
+FROM Employee
+RIGHT JOIN Department ON Employee.departmentId = Department.deptId;
+
 
