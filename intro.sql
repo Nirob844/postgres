@@ -49,6 +49,19 @@ DROP COLUMN age;
 
 SELECT * FROM users; 
 
+CREATE Table courses(
+    course_id SERIAL PRIMARY KEY,
+    course_name VARCHAR(255) NOT NULL
+    description VARCHAR(255) ,
+    published_date DATE
+);
+UPDATE courses 
+SET course_name = 'Course',
+description = 'course description'
+WHERE course_id = 1;
+
+DELETE FROM courses WHERE course_id =1;
+
 -- department table
 CREATE TABLE Department(
     deptId SERIAL PRIMARY KEY,
@@ -60,6 +73,9 @@ INSERT INTO Department  VALUES (1,'IT');
 CREATE TABLE Employee(
     empId SERIAL PRIMARY KEY,
     empName VARCHAR(255) NOT NULL,
+    email TEXT  NOT NULL,
+    salary INTEGER NOT NULL,
+    joiningDate DATE NOT NULL
     departmentId INT,
     constraint fk_constraint_dept
        FOREIGN KEY (departmentId)
@@ -67,14 +83,18 @@ CREATE TABLE Employee(
 );
 INSERT INTO Employee VALUES (1, 'employee', 1);
 
-CREATE Table courses(
-    course_id SERIAL PRIMARY KEY,
-    course_name VARCHAR(255) NOT NULL
-    description VARCHAR(255) ,
-    published_date DATE
-);
-UPDATE courses 
-SET course_name = 'Course',
-description = 'Course description'
-WHERE course_id = 1;
+-- ## SELECT
+SELECT * FROM Employee;
+SELECT empId,empName, departmentId FROM Employee;
+SELECT * FROM Employee WHERE salary >90000;
+SELECT * FROM Employee ORDER BY name ASC LIMIT 10 OFFSET 0;
+
+-- in not in between like
+SELECT * FROM Employee WHERE IN (1,2,3,4,5) ;
+SELECT * FROM Employee WHERE salary BETWEEN 1000 ADD 15000;
+SELECT * FROM employee WHERE name LIKE '%a%';
+SELECT * FROM employee WHERE name LIKE '__a__';
+
+
+ 
 
