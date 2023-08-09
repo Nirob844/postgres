@@ -80,20 +80,11 @@ INSERT INTO Department (deptName) VALUES
     ('Human Resources'),
     ('Finance'),
     ('IT'),
-    ('Operations'),
-    ('Customer Service'),
     ('Research and Development'),
     ('Product Management'),
-    ('Quality Assurance'),
     ('Design'),
-    ('Logistics'),
-    ('Legal'),
-    ('Public Relations'),
-    ('Administration'),
-    ('Supply Chain'),
-    ('Training and Development'),
-    ('Business Development'),
-    ('Manufacturing');
+    ('Business Development');
+    
 
 SELECT *FROM Department;
 -- employee table
@@ -120,16 +111,16 @@ VALUES
     ('Emma Anderson', 'emma.anderson@example.com', 53000, '2023-04-01', 8),
     ('Liam Taylor', 'liam.taylor@example.com', 68000, '2022-12-22', 9),
     ('Ava Rodriguez', 'ava.rodriguez@example.com', 59000, '2023-06-08', 10),
-    ('Sophia Clark', 'sophia.clark@example.com', 57000, '2022-10-09', 11),
-    ('Noah White', 'noah.white@example.com', 62000, '2022-11-18', 12),
-    ('Isabella Hall', 'isabella.hall@example.com', 54000, '2023-01-30', 13),
-    ('Liam Davis', 'liam.davis@example.com', 63000, '2023-02-10', 14),
-    ('Olivia Allen', 'olivia.allen@example.com', 57000, '2023-04-22', 15),
-    ('Lucas Martinez', 'lucas.martinez@example.com', 61000, '2023-06-11', 16),
-    ('Sophia Miller', 'sophia.miller@example.com', 55000, '2022-09-07', 17),
-    ('Aiden Smith', 'aiden.smith@example.com', 64000, '2022-12-03', 18),
-    ('Amelia Wilson', 'amelia.wilson@example.com', 59000, '2023-03-27', 19),
-    ('Jackson Johnson', 'jackson.johnson@example.com', 56000, '2023-07-02', 20);
+    ('Sophia Clark', 'sophia.clark@example.com', 57000, '2022-10-09', 1),
+    ('Noah White', 'noah.white@example.com', 62000, '2022-11-18', 7),
+    ('Isabella Hall', 'isabella.hall@example.com', 54000, '2023-01-30', 9),
+    ('Liam Davis', 'liam.davis@example.com', 63000, '2023-02-10', 3),
+    ('Olivia Allen', 'olivia.allen@example.com', 57000, '2023-04-22', 2),
+    ('Lucas Martinez', 'lucas.martinez@example.com', 61000, '2023-06-11', 10),
+    ('Sophia Miller', 'sophia.miller@example.com', 55000, '2022-09-07', 6),
+    ('Aiden Smith', 'aiden.smith@example.com', 64000, '2022-12-03', 6),
+    ('Amelia Wilson', 'amelia.wilson@example.com', 59000, '2023-03-27', 8),
+    ('Jackson Johnson', 'jackson.johnson@example.com', 56000, '2023-07-02', 4);
 
 
 -- ## SELECT
@@ -146,9 +137,14 @@ SELECT * FROM Employee WHERE salary BETWEEN 50000 AND 60000;
 SELECT * FROM employee WHERE empName LIKE '%a%';
 SELECT * FROM employee WHERE empName LIKE '_a_';
 
--- ## joining inner left right
+-- ## joining inner left right full
  SELECT empId,empName, deptId,deptName
 FROM Employee
-RIGHT JOIN Department ON Employee.departmentId = Department.deptId;
+FULL JOIN Department ON Employee.departmentId = Department.deptId;
 
+-- ## aggregation min max sum avg
 
+SELECT Department.deptId, deptName, AVG(salary),sum(salary), MAX(salary),min(salary),count(*)
+FROM Employee
+INNER JOIN Department ON Employee.departmentId = Department.deptId
+GROUP BY Department.deptId, deptName;
